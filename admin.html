@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo - Teorias & Curiosidades</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f7fb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1400px, 95%); margin: 0 auto; }
+
+    .admin-shell {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 30px 20px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      color: #f3c969;
+    }
+
+    .nav-group {
+      margin-bottom: 24px;
+    }
+
+    .nav-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a7b7d0;
+      margin: 0 0 12px 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #dfeaf7;
+      font-weight: 600;
+      margin-bottom: 6px;
+      transition: 0.2s;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .main {
+      padding: 30px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0d1b2a;
+      margin: 0;
+    }
+
+    .user-pill {
+      background: #fff;
+      border-radius: 999px;
+      padding: 12px 18px;
+      box-shadow: 0 6px 16px rgba(16,33,55,0.05);
+      font-weight: 600;
+      color: #1b3553;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(16,33,55,0.05);
+    }
+
+    .stat-label {
+      color: #5d6d7d;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0d1b2a;
+    }
+
+    .stat-change {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #1d8f5d;
+      font-weight: 600;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 10px 30px rgba(16,33,55,0.05);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #0d1b2a;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #0d1b2a;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+    }
+
+    .btn-warning {
+      background: #f3c969;
+      color: #0d1b2a;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 14px 12px;
+      border-bottom: 1px solid #edf2f8;
+      font-size: 0.96rem;
+    }
+
+    th {
+      color: #5d6d7d;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .status.published {
+      background: #e9faf1;
+      color: #1d8f5d;
+    }
+
+    .status.draft {
+      background: #fff3d8;
+      color: #a16100;
+    }
+
+    .status.review {
+      background: #edf3ff;
+      color: #23436e;
+    }
+
+    .quick-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-box {
+      background: #f8fafb;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #edf2f8;
+    }
+
+    .action-box h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0d1b2a;
+    }
+
+    .action-box p {
+      margin: 0 0 12px;
+      color: #4d5b6b;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .action-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .metric-item {
+      background: #f8fafb;
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid #edf2f8;
+    }
+
+    .metric-item strong {
+      display: block;
+      color: #0d1b2a;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .metric-item span {
+      color: #5d6d7d;
+      font-size: 0.9rem;
+    }
+
+    .top-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .category-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafb;
+      border: 1px solid #edf2f8;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .category-name {
+      color: #0d1b2a;
+      font-weight: 600;
+    }
+
+    .bar {
+      width: 100%;
+      height: 10px;
+      background: #edf2f8;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #7ea4ff);
+      border-radius: inherit;
+    }
+
+    .text-small {
+      color: #5d6d7d;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 1100px) {
+      .admin-shell {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        padding-bottom: 10px;
+      }
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+      .main {
+        padding: 20px;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .page-title {
+        font-size: 1.5rem;
+      }
+      th, td {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="brand">📚 Teorias & Curiosidades</div>
+
+      <div class="nav-group">
+        <div class="nav-title">Menu</div>
+        <div class="nav-item active">🏠 Dashboard</div>
+        <div class="nav-item">📝 Artigos</div>
+        <div class="nav-item">🏷️ Categorias</div>
+        <div class="nav-item">👤 Autores</div>
+        <div class="nav-item">📚 Glossário</div>
+        <div class="nav-item">💬 Comentários</div>
+        <div class="nav-item">⚙️ Configurações</div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Ações Rápidas</div>
+        <div class="nav-item">✍️ Novo artigo</div>
+        <div class="nav-item">📤 Publicar</div>
+        <div class="nav-item">📈 Relatórios</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1 class="page-title">Dashboard</h1>
+        <div class="user-pill">Olá, Admin • 09:42</div>
+      </div>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Artigos Públicos</div>
+          <div class="stat-value">248</div>
+          <div class="stat-change">↑ 12% este mês</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Visualizações</div>
+          <div class="stat-value">18.4K</div>
+          <div class="stat-change">↑ 20% este mês</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Usuários</div>
+          <div class="stat-value">3.2K</div>
+          <div class="stat-change">↑ 8% este mês</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Pendências</div>
+          <div class="stat-value">14</div>
+          <div class="stat-change">3 revisão urgente</div>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Artigos Recentes</h3>
+            <button class="btn btn-primary">Novo Artigo</button>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Categoria</th>
+                <th>Autor</th>
+                <th>Status</th>
+                <th>Atualizado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>O que é Estrutural-Funcionalismo?</td>
+                <td>Sociologia</td>
+                <td>Equipe</td>
+                <td><span class="status published">Publicado</span></td>
+                <td>Hoje</td>
+              </tr>
+              <tr>
+                <td>Por que normas sociais são tão fortes?</td>
+                <td>Comportamento</td>
+                <td>Maria L.</td>
+                <td><span class="status review">Em revisão</span></td>
+                <td>Ontem</td>
+              </tr>
+              <tr>
+                <td>Marxismo e conflito de classes</td>
+                <td>Teorias</td>
+                <td>Lucas P.</td>
+                <td><span class="status published">Publicado</span></td>
+                <td>2 dias</td>
+              </tr>
+              <tr>
+                <td>Habitus e desigualdade social</td>
+                <td>Desigualdade</td>
+                <td>Renata C.</td>
+                <td><span class="status draft">Rascunho</span></td>
+                <td>4 dias</td>
+              </tr>
+              <tr>
+                <td>O papel do desejo na vida social</td>
+                <td>Psicologia</td>
+                <td>Equipe</td>
+                <td><span class="status review">Em revisão</span></td>
+                <td>5 dias</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Ações Rápidas</h3>
+          </div>
+
+          <div class="quick-actions">
+            <div class="action-box">
+              <h4>✍️ Criar novo artigo</h4>
+              <p>Adicionar texto, categoria, tags e imagens para publicar novo conteúdo.</p>
+              <button class="btn btn-warning">Novo rascunho</button>
+            </div>
+
+            <div class="action-box">
+              <h4>🏷️ Gerenciar categorias</h4>
+              <p>Organize as categorias principais do site e sua ordem de destaque.</p>
+              <div class="action-line">
+                <span class="text-small">12 categorias ativas</span>
+                <button class="btn btn-primary">Gerenciar</button>
+              </div>
+            </div>
+
+            <div class="action-box">
+              <h4>📚 Atualizar glossário</h4>
+              <p>Adicionar termos e definições para reforçar a base de conhecimento.</p>
+              <button class="btn btn-warning">Atualizar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-grid" style="margin-top: 24px;">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Estatísticas de Conteúdo</h3>
+          </div>
+
+          <div class="metric-list">
+            <div class="metric-item">
+              <strong>62%</strong>
+              <span>dos leitores acessam artigos de sociologia</span>
+            </div>
+
+            <div class="metric-item">
+              <strong>18%</strong>
+              <span>crescimento de acesso em teorias contemporâneas</span>
+            </div>
+
+            <div class="metric-item">
+              <strong>4.2 min</strong>
+              <span>tempo médio de leitura por artigo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Categorias Mais Populares</h3>
+          </div>
+
+          <div class="top-categories">
+            <div>
+              <div class="category-row">
+                <span class="category-name">Sociologia</span>
+                <span class="text-small">72%</span>
+              </div>
+              <div class="bar"><span style="width:72%"></span></div>
+            </div>
+
+            <div>
+              <div class="category-row">
+                <span class="category-name">Comportamento</span>
+                <span class="text-small">58%</span>
+              </div>
+              <div class="bar"><span style="width:58%"></span></div>
+            </div>
+
+            <div>
+              <div class="category-row">
+                <span class="category-name">Cultura</span>
+                <span class="text-small">46%</span>
+              </div>
+              <div class="bar"><span style="width:46%"></span></div>
+            </div>
+
+            <div>
+              <div class="category-row">
+                <span class="category-name">Política</span>
+                <span class="text-small">39%</span>
+              </div>
+              <div class="bar"><span style="width:39%"></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
