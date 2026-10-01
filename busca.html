@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busca - Teorias & Curiosidades</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    header {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(16,33,55,0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3c969;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: #f3c969; }
+
+    .breadcrumb {
+      background: #fff;
+      border-bottom: 1px solid #e0e7f0;
+      padding: 12px 0;
+      color: #5d6d7d;
+      font-size: 0.9rem;
+    }
+    .breadcrumb a { color: #2563eb; }
+
+    .search-hero {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      color: #fff;
+      padding: 60px 0;
+    }
+    .search-hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    .search-box {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 800px;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 16px 18px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+    }
+    .search-box button {
+      background: #f3c969;
+      color: #0d1b2a;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 22px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .search-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+      padding: 50px 0;
+    }
+
+    .filters {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(16,33,55,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .filters h3 {
+      margin: 0 0 16px;
+      color: #0d1b2a;
+      font-size: 1.1rem;
+    }
+
+    .filter-block {
+      margin-bottom: 24px;
+    }
+
+    .filter-block label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #3d4d5d;
+      font-weight: 600;
+    }
+
+    .filter-block select,
+    .filter-block input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dfeaf7;
+      border-radius: 8px;
+      background: #fff;
+      color: #1c2430;
+      font-size: 0.95rem;
+    }
+
+    .results {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .result-summary {
+      background: #fff;
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(16,33,55,0.05);
+      color: #4d5b6b;
+      font-size: 0.95rem;
+    }
+
+    .result-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(16,33,55,0.05);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+    }
+
+    .result-thumb {
+      background: linear-gradient(135deg, #dfeaf7, #b6c7dd);
+      border-radius: 12px;
+      min-height: 130px;
+    }
+
+    .result-body .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: #edf3ff;
+      color: #23436e;
+      border-radius: 999px;
+      padding: 7px 10px;
+      margin-bottom: 10px;
+    }
+
+    .result-body h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+      color: #0d1b2a;
+    }
+
+    .result-body p {
+      margin: 0 0 14px;
+      color: #4d5b6b;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #5d6d7d;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #091521;
+      color: #dfeaf7;
+      padding: 40px 0;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .search-content {
+        grid-template-columns: 1fr;
+      }
+      .filters {
+        position: static;
+      }
+      .result-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .search-box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">📚 Teorias & Curiosidades</div>
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Glossário</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Início</a> / Busca
+    </div>
+  </div>
+
+  <section class="search-hero">
+    <div class="container">
+      <h1>Buscar artigos, temas, teorias e curiosidades</h1>
+      <div class="search-box">
+        <input type="text" value="sociedade" />
+        <button>Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container search-content">
+      <aside class="filters">
+        <h3>Filtros</h3>
+
+        <div class="filter-block">
+          <label for="category">Categoria</label>
+          <select id="category">
+            <option>Qualquer categoria</option>
+            <option>Sociologia</option>
+            <option>Cultura</option>
+            <option>Teorias</option>
+            <option>Comportamento</option>
+            <option>Política</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="author">Autor</label>
+          <select id="author">
+            <option>Qualquer autor</option>
+            <option>Émile Durkheim</option>
+            <option>Karl Marx</option>
+            <option>Max Weber</option>
+            <option>Pierre Bourdieu</option>
+            <option>Erving Goffman</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="type">Tipo de conteúdo</label>
+          <select id="type">
+            <option>Artigo</option>
+            <option>Curiosidade</option>
+            <option>Glossário</option>
+            <option>Autor</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="date">Data</label>
+          <input type="text" id="date" value="Últimos 12 meses" />
+        </div>
+      </aside>
+
+      <section class="results">
+        <div class="result-summary">Mostrando 5 resultados para “sociedade”</div>
+
+        <div class="result-card">
+          <div class="result-thumb"></div>
+          <div class="result-body">
+            <span class="tag">Sociologia</span>
+            <h3>O que é Estrutural-Funcionalismo?</h3>
+            <div class="meta-row">
+              <span>Émile Durkheim</span>
+              <span>12 min</span>
+              <span>Publicado há 2 dias</span>
+            </div>
+            <p>Uma abordagem teórica que analisa a sociedade como um sistema integrado, colocando cada instituição em função de manter a ordem e a estabilidade.</p>
+            <a href="artigo.html" class="read-more">Ler artigo</a>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-thumb"></div>
+          <div class="result-body">
+            <span class="tag">Teorias</span>
+            <h3>Marxismo e conflito de classes</h3>
+            <div class="meta-row">
+              <span>Karl Marx</span>
+              <span>9 min</span>
+              <span>Publicado há 5 dias</span>
+            </div>
+            <p>A sociedade capitalista é marcada por conflitos entre classes e pela desigualdade econômica, e isso influencia diretamente a organização social.</p>
+            <a href="#" class="read-more">Ler artigo</a>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-thumb"></div>
+          <div class="result-body">
+            <span class="tag">Curiosidades</span>
+            <h3>Por que normas sociais são tão fortes?</h3>
+            <div class="meta-row">
+              <span>Equipe</span>
+              <span>7 min</span>
+              <span>Publicado há 1 semana</span>
+            </div>
+            <p>Normas sociais orientam o comportamento humano e ajudam a manter ordem coletiva, mas também podem limitar liberdade individual e reforçar padrões.</p>
+            <a href="#" class="read-more">Ler artigo</a>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-thumb"></div>
+          <div class="result-body">
+            <span class="tag">Glossário</span>
+            <h3>Coesão Social</h3>
+            <div class="meta-row">
+              <span>Glossário</span>
+              <span>4 min</span>
+              <span>Atualizado hoje</span>
+            </div>
+            <p>Força que une os membros de um grupo ou sociedade, mantendo-os integrados e coordenados por meio de regras, valores e solidariedade compartilhada.</p>
+            <a href="glossario.html" class="read-more">Ver definição</a>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-thumb"></div>
+          <div class="result-body">
+            <span class="tag">Autores</span>
+            <h3>Émile Durkheim: pensamento e legado</h3>
+            <div class="meta-row">
+              <span>Émile Durkheim</span>
+              <span>10 min</span>
+              <span>Publicado há 6 dias</span>
+            </div>
+            <p>Um perfil sobre o sociólogo francês cujo trabalho definiu as bases do estudo da sociedade moderna e da solidariedade social.</p>
+            <a href="autor-durkheim.html" class="read-more">Ver perfil</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>Teorias & Curiosidades</strong><br />
+        Enciclopédia da sociedade e do comportamento humano
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
