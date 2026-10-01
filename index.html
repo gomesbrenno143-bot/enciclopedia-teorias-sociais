@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teorias e Curiosidades da Sociedade - Enciclopédia</title>
+  <meta name="description" content="Uma enciclopédia acessível para entender como a sociedade funciona, como as pessoas se relacionam e por que certas ideias moldam o mundo." />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Header e Navegação */
+    header {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3c969;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      transition: 0.2s;
+      padding: 6px 0;
+    }
+    .nav-links a:hover {
+      color: #f3c969;
+      border-bottom: 2px solid #f3c969;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b3553 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin: 0 0 20px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      max-width: 700px;
+      color: #dfeaf7;
+      margin: 0 0 24px;
+    }
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background: #f3c969;
+      color: #0d1b2a;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(243, 201, 105, 0.3);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Search Card */
+    .search-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .search-card input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #dfeaf7;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+    .search-card input::placeholder {
+      color: #7d8d9d;
+    }
+    .search-card button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #f3c969;
+      color: #0d1b2a;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .search-card button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(243, 201, 105, 0.3);
+    }
+
+    /* Sections */
+    section {
+      padding: 70px 0;
+    }
+    section:nth-child(even) {
+      background: #fff;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin: 0 0 12px;
+      color: #0d1b2a;
+    }
+    .section-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .section-intro > div:first-child {
+      flex: 1;
+    }
+    .section-intro p {
+      max-width: 500px;
+      color: #4d5b6b;
+      line-height: 1.7;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Grids */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(280px, 1fr));
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(16, 33, 55, 0.06);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(16, 33, 55, 0.12);
+    }
+    .card-image {
+      height: 180px;
+      background: linear-gradient(135deg, #dfeaf7, #b6c7dd);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 27, 42, 0.05);
+    }
+    .card-body {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: #edf3ff;
+      color: #23436e;
+      border-radius: 999px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      color: #0d1b2a;
+      line-height: 1.4;
+    }
+    .card p {
+      margin: 0 0 16px;
+      color: #4d5b6b;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+    .card a {
+      color: #2563eb;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: auto;
+      transition: 0.2s;
+    }
+    .card a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* Curiosity Box */
+    .curiosity-section {
+      background: linear-gradient(135deg, #f3f7ff, #e8f3ef);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .curiosity-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      align-items: center;
+      padding: 50px;
+    }
+    .curiosity-content .tag {
+      margin-bottom: 16px;
+    }
+    .curiosity-content .quote {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 16px 0 20px;
+      color: #0d1b2a;
+      line-height: 1.3;
+    }
+    .curiosity-content p {
+      color: #3d4d5d;
+      line-height: 1.8;
+      margin: 0;
+      font-size: 1rem;
+    }
+    .curiosity-panel {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(16, 33, 55, 0.08);
+    }
+    .curiosity-panel h3 {
+      margin: 0 0 20px;
+      color: #0d1b2a;
+      font-size: 1.2rem;
+    }
+    .curiosity-panel ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: none;
+    }
+    .curiosity-panel li {
+      margin-bottom: 14px;
+      color: #3d4d5d;
+      line-height: 1.6;
+      padding-left: 24px;
+      position: relative;
+    }
+    .curiosity-panel li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #f3c969;
+      font-weight: 700;
+    }
+
+    /* Featured Authors */
+    .authors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .author-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(16, 33, 55, 0.06);
+      transition: 0.3s;
+    }
+    .author-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(16, 33, 55, 0.12);
+    }
+    .author-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dfeaf7, #b6c7dd);
+      margin: 0 auto 16px;
+    }
+    .author-card h3 {
+      margin: 0 0 6px;
+      color: #0d1b2a;
+      font-size: 1.2rem;
+    }
+    .author-card .dates {
+      color: #7d8d9d;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    .author-card p {
+      color: #4d5b6b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+    .author-card a {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      color: #fff;
+      border-radius: 24px;
+      padding: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+    .newsletter-content h3 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    .newsletter-content p {
+      margin: 0;
+      color: #dfeaf7;
+      line-height: 1.7;
+      max-width: 400px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      min-width: 350px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+    }
+    .newsletter-form button {
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: #f3c969;
+      color: #0d1b2a;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(243, 201, 105, 0.3);
+    }
+
+    /* CTA Section */
+    .cta-banner {
+      background: linear-gradient(135deg, #f3c969, #f5d99a);
+      border-radius: 24px;
+      padding: 50px;
+      text-align: center;
+    }
+    .cta-banner h3 {
+      margin: 0 0 12px;
+      color: #0d1b2a;
+      font-size: 2rem;
+    }
+    .cta-banner p {
+      margin: 0 0 24px;
+      color: #2d4060;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #091521;
+      color: #dfeaf7;
+      padding: 50px 0 30px;
+      margin-top: 0;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-section h4 {
+      margin: 0 0 16px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .footer-section a {
+      display: block;
+      margin-bottom: 10px;
+      color: #bdd6f0;
+      transition: 0.2s;
+    }
+    .footer-section a:hover {
+      color: #f3c969;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #7d8d9d;
+    }
+
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .categories-grid, .articles-grid, .authors-grid, .mini-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .curiosity-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .newsletter {
+        flex-direction: column;
+        text-align: center;
+        align-items: stretch;
+      }
+      .newsletter-form {
+        flex-direction: column;
+        min-width: auto;
+      }
+      .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+      .hero {
+        padding: 60px 0 40px;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .categories-grid, .articles-grid, .authors-grid, .mini-grid {
+        grid-template-columns: 1fr;
+      }
+      .buttons {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+      section {
+        padding: 50px 0;
+      }
+      .curiosity-inner {
+        padding: 30px;
+      }
+      .curiosity-content .quote {
+        font-size: 1.8rem;
+      }
+      .section-intro {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .newsletter {
+        padding: 30px;
+      }
+      .cta-banner {
+        padding: 30px;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">📚 Teorias & Curiosidades</div>
+      <nav class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#teorias">Teorias</a>
+        <a href="#autores">Autores</a>
+        <a href="#curiosidades">Curiosidades</a>
+        <a href="#glossario">Glossário</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="inicio">
+    <div class="container hero-inner">
+      <div>
+        <h1>Entenda a sociedade, o comportamento humano e as ideias que a movem.</h1>
+        <p>
+          Explore teorias sociais clássicas e contemporâneas, autores fundamentais, curiosidades do cotidiano e conceitos que ajudam a compreender o mundo em que vivemos.
+        </p>
+        <div class="buttons">
+          <button class="btn btn-primary">🚀 Explorar teorias</button>
+          <button class="btn btn-secondary">💡 Ler curiosidades</button>
+        </div>
+      </div>
+
+      <div class="search-card">
+        <input type="text" placeholder="Buscar por teoria, autor ou tema..." />
+        <button>Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorias em Destaque -->
+  <section>
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <h2>Categorias em Destaque</h2>
+        </div>
+        <p>Uma visão geral das áreas que conectam teoria, cultura, poder e comportamento social.</p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Teorias</span>
+            <h3>Teorias Clássicas</h3>
+            <p>Durkheim, Marx, Weber e os pilares da sociologia moderna.</p>
+            <a href="#">Explorar →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Teorias</span>
+            <h3>Teorias Contemporâneas</h3>
+            <p>Bourdieu, Foucault, Bauman e pensadores do século XXI.</p>
+            <a href="#">Explorar →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Conceitos</span>
+            <h3>Comportamento Humano</h3>
+            <p>Por que seguimos normas, tendências e padrões sem perceber.</p>
+            <a href="#">Explorar →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Glossário</span>
+            <h3>Conceitos Sociais</h3>
+            <p>Habitus, anomia, capital social e termos fundamentais.</p>
+            <a href="#">Explorar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artigos em Destaque -->
+  <section style="background: #fff;">
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <h2>Artigos em Destaque</h2>
+        </div>
+        <p>Leituras fundamentais para entender como a sociedade se organiza e muda.</p>
+      </div>
+
+      <div class="articles-grid">
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Sociologia</span>
+            <h3>O que é Estrutural-Funcionalismo?</h3>
+            <p>Como cada parte da sociedade funciona para manter o equilíbrio do sistema.</p>
+            <a href="artigo.html">Ler artigo →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Marxismo</span>
+            <h3>Classe Social e Conflito</h3>
+            <p>Como as desigualdades econômicas moldam relações de poder e acesso material.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Cultura</span>
+            <h3>Por que Normas Sociais são Tão Fortes?</h3>
+            <p>O papel da socialização, status e pressão coletiva no comportamento.</p>
+            <a href="#">Ler artigo →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curiosidade do Dia -->
+  <section>
+    <div class="container">
+      <div class="curiosity-section">
+        <div class="curiosity-inner">
+          <div class="curiosity-content">
+            <span class="tag">Curiosidade do Dia</span>
+            <div class="quote">"A sociedade não apenas molda o indivíduo — o indivíduo também a transforma todos os dias."</div>
+            <p>
+              Muitas das regras que seguimos não são naturais, mas históricas, culturais e socialmente construídas. Isso explica por que costumes, linguagem e comportamento variam tanto entre grupos, épocas e culturas. Você, agora, está alterando a sociedade apenas lendo este texto.
+            </p>
+          </div>
+
+          <div class="curiosity-panel">
+            <h3>🔥 Temas Mais Acessados</h3>
+            <ul>
+              <li>Identidade social e pertencimento</li>
+              <li>Poder, autoridade e legitimidade</li>
+              <li>Desigualdade e estratificação de classe</li>
+              <li>Relações, normas e convenções</li>
+              <li>Cultura de massa e consumo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pensadores em Destaque -->
+  <section style="background: #fff;">
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <h2>Pensadores Fundamentais</h2>
+        </div>
+        <p>Conheça os autores que moldaram nossa compreensão da sociedade.</p>
+      </div>
+
+      <div class="authors-grid">
+        <div class="author-card">
+          <div class="author-avatar"></div>
+          <h3>Émile Durkheim</h3>
+          <div class="dates">1858 - 1917</div>
+          <p>Fundador do estrutural-funcionalismo. Criou conceitos como anomia e solidariedade social.</p>
+          <a href="#">Ver perfil →</a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-avatar"></div>
+          <h3>Karl Marx</h3>
+          <div class="dates">1818 - 1883</div>
+          <p>Teórico do conflito. Analisou classe social, exploração e mudança histórica.</p>
+          <a href="#">Ver perfil →</a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-avatar"></div>
+          <h3>Max Weber</h3>
+          <div class="dates">1864 - 1920</div>
+          <p>Desenvolveu teoria da ação social, racionalização e burocracia moderna.</p>
+          <a href="#">Ver perfil →</a>
+        </div>
+
+        <div class="author-card">
+          <div class="author-avatar"></div>
+          <h3>Pierre Bourdieu</h3>
+          <div class="dates">1930 - 2002</div>
+          <p>Teórico do habitus e capital cultural. Explicou reprodução social e status.</p>
+          <a href="#">Ver perfil →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Últimas Publicações -->
+  <section>
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <h2>Últimas Publicações</h2>
+        </div>
+        <p>Conteúdo novo para seguir explorando teoria, cultura e comportamento social.</p>
+      </div>
+
+      <div class="mini-grid">
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Psicologia</span>
+            <h3>O Papel do Desejo na Vida Social</h3>
+            <p>Como motivações inconscientes guiam escolhas, relacionamentos e status.</p>
+            <a href="#">Ler →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Mídia</span>
+            <h3>Como a Cultura Digital Redefine Identidade</h3>
+            <p>Redes sociais, algoritmos e performatividade no mundo conectado.</p>
+            <a href="#">Ler →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image"></div>
+          <div class="card-body">
+            <span class="tag">Política</span>
+            <h3>Poder e Legitimidade na Vida Cotidiana</h3>
+            <p>Como o poder está presente em conversas, decisões e relacionamentos.</p>
+            <a href="#">Ler →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section style="background: #fff;">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>Mergulhe Mais Fundo</h3>
+        <p>Explore nossa biblioteca completa com centenas de artigos sobre sociedade, cultura e comportamento humano.</p>
+        <button class="btn btn-primary">📖 Acessar biblioteca completa</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section>
+    <div class="container">
+      <div class="newsletter">
+        <div class="newsletter-content">
+          <h3>Receba Novas Ideias</h3>
+          <p>Inscreva-se e receba artigos sobre sociedade, cultura e teoria social direto na sua caixa de entrada.</p>
+        </div>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Seu e-mail" />
+          <button>Inscrever</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contato">
+    <div class="container footer-inner">
+      <div class="footer-section">
+        <h4>📚 Sobre</h4>
+        <a href="#">Sobre o projeto</a>
+        <a href="#">Nossa missão</a>
+        <a href="#">Critérios editorial</a>
+        <a href="#">Políticas</a>
+      </div>
+      <div class="footer-section">
+        <h4>📖 Conteúdo</h4>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Glossário</a>
+      </div>
+      <div class="footer-section">
+        <h4>🔗 Comunidade</h4>
+        <a href="#">Sugerir artigo</a>
+        <a href="#">Contribuir</a>
+        <a href="#">Feedback</a>
+        <a href="#">Contato</a>
+      </div>
+      <div class="footer-section">
+        <h4>📱 Redes</h4>
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">Newsletter</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2024 Teorias & Curiosidades. Uma enciclopédia da sociedade, cultura e comportamento humano. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
