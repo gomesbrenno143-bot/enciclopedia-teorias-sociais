@@ -1,10 +1,33 @@
-import type { Config } from 'next'
-
-const config: Config = {
-  metadata: {
-    title: 'Teorias & Curiosidades - Enciclopédia da Sociedade',
-    description: 'Uma enciclopédia acessível para entender como a sociedade funciona, como as pessoas se relacionam e por que certas ideias moldam o mundo.',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    unoptimized: true,
   },
-}
+  headers: async () => {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
+    ];
+  },
+};
 
-export default config
+module.exports = nextConfig;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://seu-dominio.vercel.app</loc>
+    <lastmod>2024-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://seu-dominio.vercel.app/sobre</loc>
+    <lastmod>2024-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://seu-dominio.vercel.app/glossario</loc>
+    <lastmod>2024-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://seu-dominio.vercel.app/contato</loc>
+    <lastmod>2024-10-01</lastmod>
+  </url>
+</urlset>
