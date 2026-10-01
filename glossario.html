@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossário - Teorias & Curiosidades</title>
+  <meta name="description" content="Glossário de termos essenciais sobre sociedade, sociologia, cultura e comportamento humano." />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    header {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3c969;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: #f3c969; }
+
+    .breadcrumb {
+      background: #fff;
+      border-bottom: 1px solid #e0e7f0;
+      padding: 12px 0;
+      color: #5d6d7d;
+      font-size: 0.9rem;
+    }
+    .breadcrumb a { color: #2563eb; }
+
+    .glossary-hero {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      color: #fff;
+      padding: 60px 0;
+    }
+    .glossary-hero h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+    .glossary-hero p {
+      font-size: 1.1rem;
+      color: #dfeaf7;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0;
+    }
+
+    .search-bar {
+      margin: 32px 0 0 0;
+      display: flex;
+      gap: 12px;
+    }
+    .search-bar input {
+      flex: 1;
+      max-width: 400px;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+    .search-bar button {
+      padding: 14px 22px;
+      background: #f3c969;
+      color: #0d1b2a;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .glossary-wrapper {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 30px;
+      padding: 60px 0;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: fit-content;
+      position: sticky;
+      top: 120px;
+    }
+
+    .sidebar-box {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(16, 33, 55, 0.06);
+    }
+
+    .sidebar-box h3 {
+      margin: 0 0 16px;
+      font-size: 0.95rem;
+      color: #0d1b2a;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .alphabet-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .alphabet-letter {
+      background: #f8fafb;
+      border: 2px solid #e0e7f0;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .alphabet-letter:hover, .alphabet-letter.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-item {
+      padding: 10px 12px;
+      background: #f8fafb;
+      border-left: 3px solid #e0e7f0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+      color: #3d4d5d;
+    }
+
+    .category-item:hover, .category-item.active {
+      background: #edf3ff;
+      border-left-color: #2563eb;
+      color: #2563eb;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .glossary-section {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(16, 33, 55, 0.06);
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0d1b2a;
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f3c969;
+    }
+
+    .glossary-item {
+      padding: 20px 0;
+      border-bottom: 1px solid #e0e7f0;
+    }
+
+    .glossary-item:last-child {
+      border-bottom: none;
+    }
+
+    .term {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0d1b2a;
+      margin: 0 0 10px;
+    }
+
+    .definition {
+      color: #2d4060;
+      line-height: 1.8;
+      font-size: 1rem;
+      margin: 0 0 12px;
+    }
+
+    .description {
+      color: #4d5b6b;
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin: 0 0 12px;
+    }
+
+    .related-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      background: #edf3ff;
+      color: #23436e;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .related-link {
+      font-size: 0.9rem;
+      color: #2563eb;
+      padding: 4px 8px;
+      background: rgba(37, 99, 235, 0.08);
+      border-radius: 6px;
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, #f3f7ff, #f0f9ff);
+      border-left: 4px solid #f3c969;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #3d4d5d;
+    }
+
+    .example-box strong {
+      color: #0d1b2a;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      background: #091521;
+      color: #dfeaf7;
+      padding: 40px 0;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .glossary-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+        gap: 12px;
+      }
+      .alphabet-list {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .search-bar {
+        flex-direction: column;
+      }
+      .search-bar input {
+        max-width: 100%;
+      }
+      .glossary-section {
+        padding: 20px;
+      }
+      .alphabet-list {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">📚 Teorias & Curiosidades</div>
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Glossário</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Início</a> / Glossário
+    </div>
+  </div>
+
+  <section class="glossary-hero">
+    <div class="container">
+      <h1>Glossário</h1>
+      <p>Explore os conceitos, termos e ideias fundamentais para entender sociedade, cultura e comportamento humano.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar termo..." id="searchInput" />
+        <button>🔍 Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container glossary-wrapper">
+      <!-- Sidebar com filtros -->
+      <aside class="sidebar">
+        <div class="sidebar-box">
+          <h3>Alfabeto</h3>
+          <div class="alphabet-list">
+            <div class="alphabet-letter active" onclick="filterByLetter('A')">A</div>
+            <div class="alphabet-letter" onclick="filterByLetter('B')">B</div>
+            <div class="alphabet-letter" onclick="filterByLetter('C')">C</div>
+            <div class="alphabet-letter" onclick="filterByLetter('D')">D</div>
+            <div class="alphabet-letter" onclick="filterByLetter('E')">E</div>
+            <div class="alphabet-letter" onclick="filterByLetter('F')">F</div>
+            <div class="alphabet-letter" onclick="filterByLetter('G')">G</div>
+            <div class="alphabet-letter" onclick="filterByLetter('H')">H</div>
+            <div class="alphabet-letter" onclick="filterByLetter('I')">I</div>
+          </div>
+        </div>
+
+        <div class="sidebar-box">
+          <h3>Categorias</h3>
+          <div class="categories-list">
+            <div class="category-item active" onclick="filterByCategory('todas')">Todas</div>
+            <div class="category-item" onclick="filterByCategory('estrutura')">Estrutura Social</div>
+            <div class="category-item" onclick="filterByCategory('poder')">Poder e Autoridade</div>
+            <div class="category-item" onclick="filterByCategory('cultura')">Cultura</div>
+            <div class="category-item" onclick="filterByCategory('desigualdade')">Desigualdade</div>
+            <div class="category-item" onclick="filterByCategory('comportamento')">Comportamento</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Conteúdo Principal -->
+      <div class="main-content">
+        <!-- Seção A -->
+        <div class="glossary-section" data-letter="A">
+          <h2 class="section-title">A</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Alienação</h3>
+            <p class="definition">Sentimento de desconexão ou estranhamento em relação ao trabalho, aos produtos do trabalho, aos outros e à própria humanidade.</p>
+            <p class="description">
+              Conceito desenvolvido por Karl Marx para descrever como trabalhadores perdem o controle sobre seu trabalho na produção industrial capitalista. Também pode referir-se à sensação de isolamento em contextos sociais, culturais ou políticos.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Um operário que realiza tarefas repetitivas sem compreender o produto final pode experimentar alienação, pois não se identifica com seu trabalho.
+            </div>
+            <div class="related-links">
+              <span class="tag">Marxismo</span>
+              <span class="tag">Trabalho</span>
+              <a href="#" class="related-link">→ Karl Marx</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Anomia</h3>
+            <p class="definition">Estado de desorganização social ou pessoal caracterizado pela ausência de regras, normas claras ou orientação moral.</p>
+            <p class="description">
+              Conceito criado por Émile Durkheim para descrever períodos de crises sociais, instabilidade ou rápida mudança onde as normas tradicionais desaparecem sem serem substituídas por novas. Isso pode resultar em confusão, alienação e até comportamentos autodestrutivos.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Durante uma guerra civil ou crise econômica severa, a anomia pode aumentar, levando a comportamentos anti-sociais e aumentando taxas de suicídio.
+            </div>
+            <div class="related-links">
+              <span class="tag">Sociologia</span>
+              <span class="tag">Durkheim</span>
+              <a href="#" class="related-link">→ Émile Durkheim</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Autoridade</h3>
+            <p class="definition">Poder que é reconhecido como legítimo por aqueles sobre os quais é exercido.</p>
+            <p class="description">
+              Diferente da coerção pura, a autoridade é aceita como válida. Max Weber identificou três tipos: tradicional, carismática e racional-legal. A autoridade funciona porque as pessoas acreditam que quem a exerce tem o direito de fazê-lo.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Um professor tem autoridade sobre alunos porque a sociedade reconhece sua posição como legítima. Se apenas usasse força, seria coerção, não autoridade.
+            </div>
+            <div class="related-links">
+              <span class="tag">Poder</span>
+              <span class="tag">Weber</span>
+              <a href="#" class="related-link">→ Poder e Legitimidade</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção B -->
+        <div class="glossary-section" data-letter="B">
+          <h2 class="section-title">B</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Burocracia</h3>
+            <p class="definition">Sistema de organização administrativa baseado em regras impessoais, hierarquia clara e divisão de tarefas.</p>
+            <p class="description">
+              Max Weber analisou a burocracia como a forma mais eficiente de organização em sociedades modernas. Caracteriza-se por: regras escritas, hierarquia de autoridade, impessoalidade, especialização de funções e documentação. Embora eficiente, pode levar à rigidez e falta de humanidade.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Um governo, uma empresa grande ou uma universidade funciona burocraticamente através de departamentos, cargos definidos e processos padronizados.
+            </div>
+            <div class="related-links">
+              <span class="tag">Organização</span>
+              <span class="tag">Poder</span>
+              <a href="#" class="related-link">→ Max Weber</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção C -->
+        <div class="glossary-section" data-letter="C">
+          <h2 class="section-title">C</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Capital Social</h3>
+            <p class="definition">Redes de relacionamentos, confiança e reciprocidade que as pessoas podem usar para alcançar objetivos.</p>
+            <p class="description">
+              Diferente de capital econômico (dinheiro) ou capital cultural (educação), o capital social refere-se aos laços sociais que conectam indivíduos e comunidades. Quanto mais capital social, mais fácil cooperação, acesso a oportunidades e resolução de problemas coletivos.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Conhecer pessoas em uma área, ter amigos influentes e ser membro de grupos comunitários aumenta seu capital social.
+            </div>
+            <div class="related-links">
+              <span class="tag">Redes</span>
+              <span class="tag">Comunidade</span>
+              <a href="#" class="related-link">→ Bourdieu</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Classe Social</h3>
+            <p class="definition">Grupo de pessoas que compartilham posição econômica, educação, poder e status social similar.</p>
+            <p class="description">
+              Classes sociais são divisões hierárquicas da sociedade. Diferentes teorias definem classes de formas diferentes: Marx enfatiza propriedade dos meios de produção; Weber inclui prestígio e poder; Bourdieu inclui capital cultural e habitus. As classes moldam oportunidades, valores e comportamentos.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Classe alta, classe média e classe baixa baseadas em renda, educação e status ocupacional.
+            </div>
+            <div class="related-links">
+              <span class="tag">Desigualdade</span>
+              <span class="tag">Estratificação</span>
+              <a href="#" class="related-link">→ Marx</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Coesão Social</h3>
+            <p class="definition">Força que une os membros de um grupo ou sociedade, mantendo-os integrados e coordenados.</p>
+            <p class="description">
+              Conceito central de Durkheim. A coesão social é produzida pela solidariedade, normas compartilhadas, valores comuns e conexões entre indivíduos. Uma sociedade com alta coesão resiste a conflitos e mudanças; com baixa coesão, corre risco de desintegração.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Rituais religiosos, celebrações nacionais e leis compartilhadas aumentam a coesão social.
+            </div>
+            <div class="related-links">
+              <span class="tag">Solidariedade</span>
+              <span class="tag">Integração</span>
+              <a href="#" class="related-link">→ Durkheim</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção D -->
+        <div class="glossary-section" data-letter="D">
+          <h2 class="section-title">D</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Desigualdade Social</h3>
+            <p class="definition">Distribuição desigual de recursos, oportunidades, poder e status entre indivíduos e grupos.</p>
+            <p class="description">
+              Todas as sociedades têm algum grau de desigualdade. Pode ser baseada em renda, educação, gênero, raça, origem, religião ou outras características. A desigualdade estrutural é mantida por instituições e sistemas que perpetuam vantagens para alguns grupos e desvantagens para outros.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Diferenças de renda, acesso à educação de qualidade e oportunidades de trabalho são formas de desigualdade social.
+            </div>
+            <div class="related-links">
+              <span class="tag">Estrutura</span>
+              <span class="tag">Classe</span>
+              <a href="#" class="related-link">→ Estratificação Social</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Discurso</h3>
+            <p class="definition">Maneira como as pessoas falam, escrevem e conversam sobre tópicos. Também refere-se aos sistemas de conhecimento e poder que estruturam como compreendemos o mundo.</p>
+            <p class="description">
+              Michel Foucault argumentou que discursos não são neutros — eles criam conhecimento, poder e verdade. Os discursos dominantes definem o que é "normal", "anormal", "certo" e "errado", influenciando comportamentos e identidades.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> O "discurso médico" define doença e saúde; o "discurso criminal" define crime e punição.
+            </div>
+            <div class="related-links">
+              <span class="tag">Foucault</span>
+              <span class="tag">Poder</span>
+              <a href="#" class="related-link">→ Michel Foucault</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção E -->
+        <div class="glossary-section" data-letter="E">
+          <h2 class="section-title">E</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Estigma</h3>
+            <p class="definition">Marca social negativa que reduz o status de uma pessoa ou grupo, levando a discriminação e exclusão.</p>
+            <p class="description">
+              Conceito de Erving Goffman. Estigma pode ser visível (deficiência física) ou invisível (doença mental, orientação sexual). Pessoas estigmatizadas enfrentam preconceito, isolamento social e oportunidades reduzidas. A "gestão de impressão" é como estigmatizados lidam com sua identidade em público.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Pessoas com histórico criminal enfrentam estigma na busca por emprego; pessoas com transtorno mental sofrem estigma social.
+            </div>
+            <div class="related-links">
+              <span class="tag">Identidade</span>
+              <span class="tag">Goffman</span>
+              <a href="#" class="related-link">→ Identidade Social</a>
+            </div>
+          </div>
+
+          <div class="glossary-item">
+            <h3 class="term">Estrutura Social</h3>
+            <p class="definition">Padrões relativamente estáveis de relacionamentos, instituições e papéis que organizam uma sociedade.</p>
+            <p class="description">
+              A estrutura social não é visível como um edifício, mas como padrões que moldam comportamentos. Inclui: famílias, instituições educacionais, sistemas econômicos, governos, religião. Essas estruturas existem independentemente de qualquer indivíduo específico e persistem ao longo do tempo.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> O sistema de classes, a hierarquia familiar e as normas de gênero são parte da estrutura social.
+            </div>
+            <div class="related-links">
+              <span class="tag">Sociologia</span>
+              <span class="tag">Sistema</span>
+              <a href="#" class="related-link">→ Estrutural-Funcionalismo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção H -->
+        <div class="glossary-section" data-letter="H">
+          <h2 class="section-title">H</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Habitus</h3>
+            <p class="definition">Conjunto de disposições, predisposições e preferências internalizadas que moldam comportamento e percepção de mundo sem conscientização.</p>
+            <p class="description">
+              Conceito de Pierre Bourdieu. O habitus é formado pela socialização, classe social, educação e experiências. Funciona como um "sistema de classificação" que guia escolhas aparentemente livres mas que na verdade refletem posição social. Por isso pessoas da mesma classe tendem a ter gostos, linguagem e valores similares.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Pessoas que crescem em famílias cultas leem mais livros, frequentam museus e valorizam educação — não porque é "natural", mas porque desenvolveram habitus cultural específico.
+            </div>
+            <div class="related-links">
+              <span class="tag">Bourdieu</span>
+              <span class="tag">Classe</span>
+              <a href="#" class="related-link">→ Capital Cultural</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção I -->
+        <div class="glossary-section" data-letter="I">
+          <h2 class="section-title">I</h2>
+
+          <div class="glossary-item">
+            <h3 class="term">Identidade Social</h3>
+            <p class="definition">Maneira como uma pessoa se vê e é vista pelos outros, baseada em características como grupo, papel, status ou pertencimento.</p>
+            <p class="description">
+              A identidade é construída socialmente, não é inata. Inclui identidades de grupo (nação, classe, religião, gênero) e identidades relacionais (papéis na família, trabalho). A identidade é performativa — é reproduzida através de ações e interações cotidianas.
+            </p>
+            <div class="example-box">
+              <strong>Exemplo:</strong> Ser "brasileiro", "homem", "médico" ou "pai" são identidades sociais que moldam comportamentos e expectativas.
+            </div>
+            <div class="related-links">
+              <span class="tag">Self</span>
+              <span class="tag">Goffman</span>
+              <a href="#" class="related-link">→ Interacionismo Simbólico</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>Teorias & Curiosidades</strong><br />
+        Enciclopédia da sociedade e do comportamento humano
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterByLetter(letter) {
+      const sections = document.querySelectorAll('.glossary-section');
+      const letters = document.querySelectorAll('.alphabet-letter');
+      
+      sections.forEach(section => {
+        section.style.display = section.getAttribute('data-letter') === letter ? 'block' : 'none';
+      });
+
+      letters.forEach(l => l.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function filterByCategory(category) {
+      const items = document.querySelectorAll('.category-item');
+      items.forEach(item => item.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const terms = document.querySelectorAll('.term');
+      
+      terms.forEach(term => {
+        const item = term.closest('.glossary-item');
+        if (term.textContent.toLowerCase().includes(searchTerm) || searchTerm === '') {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
