@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Émile Durkheim - Teorias & Curiosidades</title>
+  <meta name="description" content="Perfil de Émile Durkheim, pensador central do estrutural-funcionalismo e da sociologia moderna." />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    header {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3c969;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: #f3c969; }
+
+    .breadcrumb {
+      background: #fff;
+      border-bottom: 1px solid #e0e7f0;
+      padding: 12px 0;
+      color: #5d6d7d;
+      font-size: 0.9rem;
+    }
+    .breadcrumb a { color: #2563eb; }
+
+    .author-hero {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      color: #fff;
+      padding: 70px 0;
+    }
+    .author-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .author-photo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dfeaf7, #b6c7dd);
+      border: 4px solid rgba(255,255,255,0.25);
+      margin: 0 auto;
+      box-shadow: 0 15px 35px rgba(13, 27, 42, 0.25);
+    }
+    .author-hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #dfeaf7;
+      margin-bottom: 20px;
+    }
+    .meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #bdd6f0;
+      font-size: 0.95rem;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      padding: 60px 0;
+    }
+
+    .article-content, .sidebar-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(16, 33, 55, 0.06);
+    }
+    .article-content {
+      padding: 40px;
+    }
+    .article-content h2 {
+      margin: 30px 0 16px;
+      color: #0d1b2a;
+      font-size: 1.7rem;
+    }
+    .article-content h3 {
+      margin: 26px 0 12px;
+      color: #1b3553;
+      font-size: 1.3rem;
+    }
+    .article-content p, .article-content li {
+      color: #3d4d5d;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    .article-content ul {
+      margin: 0 0 18px 20px;
+      padding-left: 20px;
+    }
+    .article-content blockquote {
+      border-left: 4px solid #2563eb;
+      padding-left: 18px;
+      margin: 28px 0;
+      font-style: italic;
+      color: #2d4060;
+      line-height: 1.8;
+    }
+
+    .concept-box {
+      background: linear-gradient(135deg, #edf3ff, #e0f2f7);
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .concept-box strong {
+      color: #0d1b2a;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .concept-box p {
+      margin: 0;
+      color: #2d4060;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .sidebar-box {
+      padding: 24px;
+    }
+    .sidebar-box h4 {
+      margin: 0 0 18px;
+      color: #0d1b2a;
+      font-size: 1.05rem;
+    }
+    .sidebar-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .sidebar-box li {
+      margin-bottom: 10px;
+      color: #3d4d5d;
+      line-height: 1.6;
+    }
+    .sidebar-box a {
+      color: #2563eb;
+    }
+
+    .author-works {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .work-item {
+      background: #f8fafb;
+      border: 1px solid #e0e7f0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      color: #3d4d5d;
+    }
+    .work-item strong { color: #0d1b2a; }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      border-radius: 12px;
+      padding: 24px;
+      color: #fff;
+    }
+    .cta-box p {
+      margin: 0 0 16px;
+      color: #dfeaf7;
+      line-height: 1.7;
+    }
+    .cta-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #f3c969;
+      color: #0d1b2a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .articles-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .mini-card {
+      background: #f8fafb;
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .mini-card a {
+      color: #2563eb;
+      font-weight: 600;
+    }
+    .mini-card p {
+      margin: 8px 0 0;
+      color: #4d5b6b;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #091521;
+      color: #dfeaf7;
+      padding: 40px 0;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+      .author-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .article-content {
+        padding: 24px;
+      }
+      .meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">📚 Teorias & Curiosidades</div>
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Glossário</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Início</a> / <a href="#">Autores</a> / Émile Durkheim
+    </div>
+  </div>
+
+  <section class="author-hero">
+    <div class="container author-grid">
+      <div class="author-photo"></div>
+      <div>
+        <h1>Émile Durkheim</h1>
+        <div class="subtitle">Sociólogo francês, pensador do estrutural-funcionalismo e da solidariedade social</div>
+        <div class="meta">
+          <span>📅 1858 - 1917</span>
+          <span>🏛️ França</span>
+          <span>📚 Sociologia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container main-content">
+      <article class="article-content">
+        <h2>Biografia</h2>
+        <p>
+          Émile Durkheim foi um sociólogo francês considerado um dos fundadores da sociologia como disciplina acadêmica. Seu trabalho buscou demonstrar que fenômenos sociais possuem regras próprias e podem ser estudados cientificamente, não apenas por meio de considerações morais ou individuais.
+        </p>
+        <p>
+          Nascido em 1858, Durkheim dedicou sua vida ao estudo da sociedade, focando especialmente em temas como a divisão do trabalho, a educação, a moralidade, a religião e as formas de organização social. Sua obra é essencial para compreender o funcionamento das sociedades modernas e os mecanismos que geram coesão e solidariedade.
+        </p>
+
+        <div class="concept-box">
+          <strong>Ideia central</strong>
+          <p>Durkheim defendia que a sociedade é um conjunto de fatos sociais, isto é, padrões externos, coletivos e coercitivos que influenciam o comportamento dos indivíduos.</p>
+        </div>
+
+        <h2>Principais ideias</h2>
+
+        <h3>1. Fatos sociais</h3>
+        <p>
+          Durkheim introduziu o conceito de <strong>fatos sociais</strong>, que são estruturas e normas coletivas que existem independentemente das ações individuais. Eles moldam o comportamento e são transmitidos por meio da educação, cultura e instituições.
+        </p>
+
+        <h3>2. Solidariedade social</h3>
+        <p>
+          Em sua obra mais famosa, <em>A Divisão do Trabalho Social</em>, Durkheim argumenta que a coesão social depende da solidariedade. Em sociedades tradicionais, a solidariedade é mecânica, baseada em semelhanças; em sociedades modernas, torna-se orgânica, baseada na interdependência entre indivíduos com funções diferentes.
+        </p>
+
+        <h3>3. Anomia</h3>
+        <p>
+          Durkheim também analisou o conceito de <strong>anomia</strong>, que descreve a ausência de regras ou a ausência de clareza sobre normas. Em situações de crise, mudança social intensa ou desorganização institucional, as pessoas podem experimentar confusão moral e desorientação.
+        </p>
+
+        <h3>4. Religião e vida moral</h3>
+        <p>
+          Para Durkheim, a religião não é apenas crença espiritual, mas também um mecanismo de integração social. A vida religiosa reforça sentimentos coletivos e ajuda a manter a ordem moral da comunidade.
+        </p>
+
+        <blockquote>
+          “A sociologia deve estudar a sociedade como um fato objetivo, não apenas como uma coleção de experiências pessoais.”
+        </blockquote>
+
+        <h2>Obras mais importantes</h2>
+        <ul>
+          <li><strong>A divisão do trabalho social</strong> (1893)</li>
+          <li><strong>As regras do método sociológico</strong> (1895)</li>
+          <li><strong>O suicídio</strong> (1897)</li>
+          <li><strong>As formas elementares da vida religiosa</strong> (1912)</li>
+        </ul>
+
+        <h2>Legado</h2>
+        <p>
+          O legado de Durkheim é gigantesco para a sociologia e para as ciências humanas. Ele ajudou a estabelecer a sociologia como ciência rigorosa e mostrou que as instituições sociais, as normas, a educação e a religião influenciam profundamente a vida humana coletiva.
+        </p>
+        <p>
+          Sua teoria continua relevante para compreender fenômenos contemporâneos, como desigualdade social, crise moral, individualismo, educação pública, violência e coesão social em contextos modernos.
+        </p>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-box">
+          <h4>📚 Obras Principais</h4>
+          <div class="author-works">
+            <div class="work-item"><strong>A divisão do trabalho social</strong> — 1893</div>
+            <div class="work-item"><strong>As regras do método sociológico</strong> — 1895</div>
+            <div class="work-item"><strong>O suicídio</strong> — 1897</div>
+            <div class="work-item"><strong>As formas elementares da vida religiosa</strong> — 1912</div>
+          </div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>🧠 Conceitos-chave</h4>
+          <ul>
+            <li><a href="#">Fato social</a></li>
+            <li><a href="#">Solidariedade</a></li>
+            <li><a href="#">Anomia</a></li>
+            <li><a href="#">Estrutura social</a></li>
+            <li><a href="#">Coesão social</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>📖 Artigos relacionados</h4>
+          <div class="articles-grid">
+            <div class="mini-card">
+              <a href="artigo.html">O que é estrutural-funcionalismo?</a>
+              <p>Entenda a teoria que analisa a sociedade como um sistema integrado.</p>
+            </div>
+            <div class="mini-card">
+              <a href="#">Durkheim e a solidariedade social</a>
+              <p>O papel da cooperação e da interdependência na vida em grupo.</p>
+            </div>
+            <div class="mini-card">
+              <a href="#">Anomia: quando as regras desaparecem</a>
+              <p>Como a ausência de normas afeta indivíduos e coletividades.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-box">
+          <p>Receba conteúdos sobre sociologia, teoria social e comportamento humano.</p>
+          <button>📩 Inscrever-se</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>Teorias & Curiosidades</strong><br />
+        Enciclopédia da sociedade e do comportamento humano
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Início</a>
+        <a href="#">Teorias</a>
+        <a href="#">Autores</a>
+        <a href="#">Curiosidades</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
