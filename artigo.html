@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O que é Estrutural-Funcionalismo? - Teorias & Curiosidades</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8fafb;
+      color: #1c2430;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: #0d1b2a;
+      color: #fff;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+      color: #f3c969;
+      transition: 0.2s;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background: #fff;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e7f0;
+      font-size: 0.9rem;
+      color: #5d6d7d;
+    }
+    .breadcrumb a {
+      color: #2563eb;
+    }
+
+    /* Hero do artigo */
+    .article-hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b3553 100%);
+      color: #fff;
+      padding: 60px 0;
+    }
+    .article-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      margin: 0 0 20px;
+    }
+    .article-hero p {
+      font-size: 1.15rem;
+      color: #dfeaf7;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0;
+    }
+
+    /* Meta info */
+    .article-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: #bdd6f0;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .meta-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* Layout do artigo */
+    .article-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      padding: 60px 0;
+    }
+
+    .article-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.06);
+    }
+
+    .article-content h2 {
+      font-size: 1.8rem;
+      margin: 40px 0 20px;
+      color: #0d1b2a;
+    }
+
+    .article-content h3 {
+      font-size: 1.4rem;
+      margin: 32px 0 16px;
+      color: #1b3553;
+    }
+
+    .article-content p {
+      line-height: 1.8;
+      margin: 0 0 20px;
+      color: #3d4d5d;
+      font-size: 1rem;
+    }
+
+    .article-content ul, .article-content ol {
+      line-height: 1.8;
+      margin: 0 0 20px 24px;
+      color: #3d4d5d;
+    }
+
+    .article-content li {
+      margin-bottom: 10px;
+    }
+
+    .article-content strong {
+      color: #0d1b2a;
+      font-weight: 600;
+    }
+
+    /* Destaque de conceito */
+    .concept-box {
+      background: linear-gradient(135deg, #edf3ff, #e0f2f7);
+      border-left: 4px solid #2563eb;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+
+    .concept-box strong {
+      color: #1b3553;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .concept-box p {
+      margin: 0;
+      color: #2d4060;
+    }
+
+    /* Exemplo prático */
+    .example-box {
+      background: linear-gradient(135deg, #f3f7ff, #f0f9ff);
+      border-left: 4px solid #f3c969;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+
+    .example-box h4 {
+      margin: 0 0 12px;
+      color: #0d1b2a;
+    }
+
+    .example-box p {
+      margin: 0;
+      color: #3d4d5d;
+    }
+
+    /* Imagem no artigo */
+    .article-image {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #dfeaf7, #b6c7dd);
+      border-radius: 12px;
+      margin: 32px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5d6d7d;
+    }
+
+    .image-caption {
+      font-size: 0.9rem;
+      color: #5d6d7d;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* Tags */
+    .article-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 32px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: #edf3ff;
+      color: #23436e;
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    /* Citações */
+    .article-content blockquote {
+      border-left: 4px solid #2563eb;
+      padding-left: 20px;
+      margin: 32px 0;
+      color: #2d4060;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* Referências */
+    .references {
+      background: #f8fafb;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 40px;
+      border: 1px solid #e0e7f0;
+    }
+
+    .references h4 {
+      margin: 0 0 16px;
+      color: #0d1b2a;
+      font-size: 1.1rem;
+    }
+
+    .references ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .references li {
+      margin-bottom: 10px;
+      color: #3d4d5d;
+      line-height: 1.6;
+    }
+
+    .references a {
+      color: #2563eb;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .sidebar-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(16, 33, 55, 0.06);
+    }
+
+    .sidebar-box h4 {
+      margin: 0 0 16px;
+      color: #0d1b2a;
+      font-size: 1rem;
+    }
+
+    .sidebar-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .sidebar-box li {
+      margin-bottom: 10px;
+      color: #3d4d5d;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .sidebar-box a {
+      color: #2563eb;
+    }
+
+    /* Call to action */
+    .cta-box {
+      background: linear-gradient(135deg, #0d1b2a, #1b3553);
+      border-radius: 12px;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .cta-box p {
+      margin: 0 0 16px;
+      color: #dfeaf7;
+      font-size: 0.95rem;
+    }
+
+    .cta-box button {
+      width: 100%;
+      padding: 12px;
+      background: #f3c969;
+      color: #0d1b2a;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Artigos relacionados */
+    .related-articles {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .related-articles h4 {
+      margin: 0 0 16px;
+      color: #0d1b2a;
+    }
+
+    .related-card {
+      background: #f8fafb;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 3px solid #2563eb;
+    }
+
+    .related-card p {
+      margin: 0;
+      color: #3d4d5d;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .related-card a {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    /* Compartilhamento */
+    .share-buttons {
+      display: flex;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .share-btn {
+      padding: 10px 14px;
+      background: #f0f4f8;
+      border: 1px solid #e0e7f0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .share-btn:hover {
+      background: #e0e7f0;
+    }
+
+    /* Footer */
+    footer {
+      background: #091521;
+      color: #dfeaf7;
+      padding: 36px 0;
+      margin-top: 60px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      .article-wrapper {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .sidebar {
+        flex-direction: row;
+      }
+
+      .sidebar-box {
+        flex: 1;
+        min-width: 250px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-content {
+        padding: 24px;
+      }
+
+      .article-hero {
+        padding: 40px 0;
+      }
+
+      .article-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .article-image {
+        height: 250px;
+      }
+
+      .sidebar {
+        flex-direction: column;
+      }
+
+      .article-content h2 {
+        font-size: 1.4rem;
+      }
+
+      .share-buttons {
+        flex-direction: column;
+      }
+
+      .share-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">Teorias & Curiosidades</div>
+      <nav class="nav-links">
+        <a href="/">Início</a>
+        <a href="/teorias">Teorias</a>
+        <a href="/autores">Autores</a>
+        <a href="/curiosidades">Curiosidades</a>
+        <a href="/glossario">Glossário</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="/">Início</a> / <a href="/teorias">Teorias</a> / <a href="/teorias/classicas">Teorias Clássicas</a> / O que é Estrutural-Funcionalismo?
+    </div>
+  </div>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="container">
+      <h1>O que é Estrutural-Funcionalismo?</h1>
+      <p>Uma abordagem teórica que explica como cada parte da sociedade funciona em conjunto para manter o equilíbrio e a coesão social.</p>
+      
+      <div class="article-meta">
+        <div class="meta-item">
+          <div class="meta-avatar">EM</div>
+          <div>
+            <strong>Enciclopédia Social</strong><br />
+            <small>Por diferentes autores</small>
+          </div>
+        </div>
+        <div class="meta-item">
+          📅 15 de setembro de 2024
+        </div>
+        <div class="meta-item">
+          ⏱️ 12 minutos de leitura
+        </div>
+        <div class="meta-item">
+          👁️ 1.2k visualizações
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container article-wrapper">
+      <!-- Artigo principal -->
+      <article class="article-content">
+        
+        <div class="article-image"></div>
+        <p class="image-caption">Imagem conceitual: como as partes da sociedade se conectam como um sistema funcional</p>
+
+        <div class="article-tags">
+          <span class="tag">Sociologia</span>
+          <span class="tag">Teorias clássicas</span>
+          <span class="tag">Durkheim</span>
+        </div>
+
+        <!-- Resumo do conceito -->
+        <div class="concept-box">
+          <strong>O que é estrutural-funcionalismo?</strong>
+          <p>Uma teoria sociológica que vê a sociedade como um sistema integrado, onde cada instituição (família, educação, política, economia) possui uma função específica que contribui para o funcionamento e estabilidade do todo.</p>
+        </div>
+
+        <!-- Introdução -->
+        <h2>Introdução</h2>
+        <p>
+          O estrutural-funcionalismo é uma das teorias mais importantes da sociologia moderna. Desenvolvida principalmente por <strong>Émile Durkheim</strong> no final do século XIX e complementada por pensadores como <strong>Talcott Parsons</strong> no século XX, essa abordagem oferece um jeito de entender como a sociedade se organiza e permanece estável.
+        </p>
+        <p>
+          Diferente de outras teorias que focam em conflitos e mudanças, o estrutural-funcionalismo pergunta: <em>"Como a sociedade funciona como um todo integrado? Qual é a função de cada instituição?"</em>
+        </p>
+
+        <!-- Conceito central -->
+        <h2>O conceito central: A sociedade como um organismo</h2>
+        <p>
+          Imagine a sociedade como um corpo humano. Assim como o coração bombeia sangue, os pulmões respiram e o cérebro coordena tudo, cada instituição social tem uma função específica:
+        </p>
+        <ul>
+          <li><strong>Família:</strong> socializa as crianças e transmite valores culturais</li>
+          <li><strong>Educação:</strong> prepara os indivíduos para papéis sociais</li>
+          <li><strong>Economia:</strong> produz e distribui recursos</li>
+          <li><strong>Política:</strong> estabelece normas e resolução de conflitos</li>
+          <li><strong>Religião:</strong> fornece significado e coesão moral</li>
+        </ul>
+
+        <p>
+          Cada uma dessas instituições não existe por acaso. Elas evoluíram porque <strong>servem uma função necessária</strong> para a sobrevivência e estabilidade da sociedade.
+        </p>
+
+        <!-- Exemplo prático -->
+        <div class="example-box">
+          <h4>📌 Exemplo: A função da educação</h4>
+          <p>
+            A escola não existe apenas para ensinar matemática ou história. Ela funciona para: preparar indivíduos para o mercado de trabalho, transmitir valores culturais compartilhados, criar redes sociais, filtrar talentos e manter a estrutura hierárquica da sociedade. Cada uma dessas funções contribui para a estabilidade do sistema.
+          </p>
+        </div>
+
+        <!-- Conceitos-chave -->
+        <h2>Conceitos-chave da teoria</h2>
+
+        <h3>1. Estrutura social</h3>
+        <p>
+          A estrutura refere-se aos padrões relativamente estáveis e previsíveis das relações sociais. Normas, instituições e papéis sociais formam a estrutura que mantém a sociedade organizada.
+        </p>
+
+        <h3>2. Função social</h3>
+        <p>
+          Cada elemento da sociedade (instituição, norma, ritual) existe porque cumpre uma função. <strong>A coesão social</strong> é a função mais importante de todas — manter as pessoas unidas e trabalhando pelo bem comum.
+        </p>
+
+        <h3>3. Solidariedade</h3>
+        <p>
+          Durkheim distinguiu entre dois tipos de solidariedade:
+        </p>
+        <ul>
+          <li><strong>Solidariedade mecânica:</strong> baseada em similaridades (sociedades tradicionais). Todos fazem e pensam parecido.</li>
+          <li><strong>Solidariedade orgânica:</strong> baseada na interdependência (sociedades modernas). As pessoas são diferentes, mas precisam umas das outras.</li>
+        </ul>
+
+        <h3>4. Normalidade e anormalidade</h3>
+        <p>
+          O que é "normal" em uma sociedade não é um acaso biológico. É definido pela estrutura social. Comportamentos que violam as normas (desvios) ameaçam a coesão social.
+        </p>
+
+        <!-- Conceito destacado -->
+        <div class="concept-box">
+          <strong>Anomia: quando falta função</strong>
+          <p>Durkheim criou o termo <strong>"anomia"</strong> para descrever o estado de desorientação quando as normas sociais desaparecem. Crises econômicas, guerras ou mudanças rápidas podem causar anomia, levando ao suicídio, violência e colapso social.</p>
+        </div>
+
+        <!-- Críticas -->
+        <h2>Limitações e críticas</h2>
+        <p>
+          Embora influente, o estrutural-funcionalismo recebeu várias críticas:
+        </p>
+        <ul>
+          <li><strong>Conservadorismo:</strong> tende a justificar o status quo. Se tudo funciona, por que mudar?</li>
+          <li><strong>Ignora conflitos:</strong> não reconhece adequadamente lutas de poder e exploração dentro das instituições</li>
+          <li><strong>Teleologia:</strong> assume que tudo que existe existe porque é necessário — nem sempre é verdade</li>
+          <li><strong>Foco exagerado em estabilidade:</strong> subestima a mudança e a criatividade social</li>
+        </ul>
+
+        <!-- Comparação -->
+        <h2>Como se compara com outras teorias?</h2>
+        <p>
+          Enquanto o estrutural-funcionalismo vê a sociedade como um sistema equilibrado, outras teorias têm visões diferentes:
+        </p>
+        <ul>
+          <li><strong>Marxismo:</strong> vê conflito de classes e exploração econômica como motor da história</li>
+          <li><strong>Interacionismo simbólico:</strong> foca em como significados são construídos nas relações face-a-face</li>
+          <li><strong>Fenomenologia:</strong> explora como indivíduos vivem e interpretam a realidade social</li>
+        </ul>
+
+        <!-- Relevância moderna -->
+        <h2>Por que ainda importa?</h2>
+        <p>
+          Apesar das críticas, o estrutural-funcionalismo continua relevante porque:
+        </p>
+        <ul>
+          <li>Ajuda a entender por que instituições persistem mesmo quando parecem disfuncionais</li>
+          <li>Explica como a socialização mantém a ordem social</li>
+          <li>Oferece um framework para analisar como mudanças em uma instituição afetam outras</li>
+          <li>É útil para estudar rituais, costumes e tradições que "não fazem sentido" racionalmente</li>
+        </ul>
+
+        <p>
+          Muitas políticas públicas são baseadas implicitamente em pensamento funcionalista: a ideia de que instituições como escola, polícia e família funcionam para manter a sociedade estável.
+        </p>
+
+        <!-- Conclusão -->
+        <h2>Conclusão</h2>
+        <p>
+          O estrutural-funcionalismo oferece uma lente poderosa para entender como a sociedade se mantém unida. Ao reconhecer que cada instituição tem uma função, podemos apreciar por que certos padrões culturais persistem — mesmo que questionemos se ainda são úteis.
+        </p>
+
+        <blockquote>
+          "A sociedade é mais que a soma de suas partes. É um sistema onde cada elemento contribui para o funcionamento do todo. Compreender essa interconexão é compreender por que vivemos como vivemos."
+        </blockquote>
+
+        <!-- Referências -->
+        <div class="references">
+          <h4>📚 Referências e fontes</h4>
+          <ol>
+            <li>Durkheim, É. (1893). <strong>A divisão do trabalho social</strong>. Obra clássica sobre solidariedade mecânica e orgânica.</li>
+            <li>Parsons, T. (1951). <strong>The Social System</strong>. Desenvolvimento do funcionalismo estrutural no século XX.</li>
+            <li>Merton, R. K. (1949). <strong>Social Theory and Social Structure</strong>. Crítica e refinamento da teoria funcionalista.</li>
+            <li>Mills, C. W. (1959). <strong>The Sociological Imagination</strong>. Crítica ao determinismo funcionalista.</li>
+            <li><a href="#">Artigo acadêmico: O funcionalismo na sociologia contemporânea</a></li>
+          </ol>
+        </div>
+
+        <!-- Compartilhamento -->
+        <div class="share-buttons">
+          <button class="share-btn">📘 Compartilhar no Facebook</button>
+          <button class="share-btn">𝕏 Compartilhar no Twitter</button>
+          <button class="share-btn">🔗 Copiar link</button>
+          <button class="share-btn">📧 Enviar por e-mail</button>
+        </div>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        
+        <!-- Box: Temas relacionados -->
+        <div class="sidebar-box related-articles">
+          <h4>🔗 Artigos relacionados</h4>
+          
+          <div class="related-card">
+            <a href="/teorias/durkheim-solidariedade">Durkheim e a solidariedade social</a>
+            <p>Como a sociedade mantém coesão através de solidariedade.</p>
+          </div>
+
+          <div class="related-card">
+            <a href="/teorias/marxismo-conflito">Marxismo vs Funcionalismo</a>
+            <p>Comparação entre duas grandes teorias sociológicas.</p>
+          </div>
+
+          <div class="related-card">
+            <a href="/curiosidades/por-que-normas-existem">Por que existem normas sociais?</a>
+            <p>Entenda o papel das normas na vida coletiva.</p>
+          </div>
+
+          <div class="related-card">
+            <a href="/glossario/anomia">Anomia: desorientação social</a>
+            <p>Quando as normas desaparecem, o que acontece?</p>
+          </div>
+        </div>
+
+        <!-- Box: Autor em destaque -->
+        <div class="sidebar-box">
+          <h4>👤 Autor em destaque</h4>
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #dfeaf7, #b6c7dd); border-radius: 50%; margin: 0 auto 12px;"></div>
+            <strong>Émile Durkheim</strong>
+            <p style="font-size: 0.9rem; color: #5d6d7d; margin: 8px 0;">1858 - 1917</p>
+          </div>
+          <p style="font-size: 0.95rem;">
+            Sociólogo francês que fundou o estrutural-funcionalismo. Criou conceitos como anomia, solidariedade social e fato social.
+          </p>
+          <a href="/autores/durkheim" style="color: #2563eb; font-weight: 600;">Ver perfil completo →</a>
+        </div>
+
+        <!-- Box: Conceitos principais -->
+        <div class="sidebar-box">
+          <h4>🎯 Conceitos-chave</h4>
+          <ul>
+            <li><a href="/glossario/estrutura-social">Estrutura social</a></li>
+            <li><a href="/glossario/funcao-social">Função social</a></li>
+            <li><a href="/glossario/solidariedade">Solidariedade</a></li>
+            <li><a href="/glossario/anomia">Anomia</a></li>
+            <li><a href="/glossario/coesao-social">Coesão social</a></li>
+            <li><a href="/glossario/fato-social">Fato social</a></li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Aprofunde seus conhecimentos sobre sociologia e teorias sociais.</p>
+          <button>📧 Receber atualizações</button>
+        </div>
+
+        <!-- Box: Temas populares -->
+        <div class="sidebar-box">
+          <h4>📊 Temas populares</h4>
+          <ul>
+            <li><a href="/teorias/identidade-social">Identidade social</a></li>
+            <li><a href="/teorias/poder-autoridade">Poder e autoridade</a></li>
+            <li><a href="/teorias/desigualdade-classe">Desigualdade de classe</a></li>
+            <li><a href="/teorias/normas-cotidiano">Normas no cotidiano</a></li>
+            <li><a href="/curiosidades/midia-influencia">Mídia e influência social</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>Teorias & Curiosidades</strong><br />
+        Enciclopédia da sociedade, comportamento e cultura
+      </div>
+      <div class="footer-links">
+        <a href="/">Início</a>
+        <a href="/teorias">Teorias</a>
+        <a href="/autores">Autores</a>
+        <a href="/curiosidades">Curiosidades</a>
+        <a href="/glossario">Glossário</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/contato">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
